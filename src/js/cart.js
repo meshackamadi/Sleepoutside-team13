@@ -2,8 +2,15 @@ import { getLocalStorage } from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
-  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  if (cartItems) {
+    // If it is somehow a single object, we can wrap it in an array to avoid map errors on old data
+    const itemsArray = Array.isArray(cartItems) ? cartItems : [cartItems];
+    const htmlItems = itemsArray.map((item) => cartItemTemplate(item));
+    document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  } else {
+    document.querySelector(".product-list").innerHTML =
+      "<p>Your cart is empty.</p>";
+  }
 }
 
 function cartItemTemplate(item) {
