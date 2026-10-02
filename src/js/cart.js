@@ -1,4 +1,7 @@
 import { getLocalStorage } from "./utils.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
+
+loadHeaderFooter("/partials/header.html", "/partials/footer.html");
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
@@ -7,7 +10,7 @@ function renderCartContents() {
     const itemsArray = Array.isArray(cartItems) ? cartItems : [cartItems];
     const htmlItems = itemsArray.map((item) => cartItemTemplate(item));
     document.querySelector(".product-list").innerHTML = htmlItems.join("");
-    
+
     // Calculate total
     let total = 0;
     itemsArray.forEach((item) => {

@@ -1,7 +1,9 @@
 import { setLocalStorage, getLocalStorage, getParam } from "./utils.mjs";
 import ProductData from "./ProductData.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
 
 const dataSource = new ProductData("tents");
+loadHeaderFooter("/partials/header.html", "/partials/footer.html");
 
 function addProductToCart(product) {
   let cart = getLocalStorage("so-cart");
