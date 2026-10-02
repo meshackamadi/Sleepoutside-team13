@@ -27,3 +27,26 @@ export function getParam(param) {
   const urlParams = new URLSearchParams(queryString);
   return urlParams.get(param);
 }
+
+export function renderWithTemplate(template, parentElement, data, callback) {
+  const fragment = document.createRange().createContextualFragment(template);
+  parentElement.replaceChildren(fragment);
+  if (callback) {
+    callback(data);
+  }
+}
+
+export async function loadTemplate(templatePath) {
+  const response = await fetch(path);
+  const template = await response.text();
+  return template;
+}
+
+export async function loadHeaderFooter(headerpath, footerpath) {
+  const header = await loadTemplate(headerpath);
+  const footer = await loadTemplate(footerpath);
+  const headerElement = document.querySelector("#main-header");
+  const footerElement = document.querySelector("#main-footer");
+  renderWithTemplate(header, headerElement);
+  renderWithTemplate(footer, footerElement);
+}
