@@ -1,6 +1,8 @@
 import ProductData from './ProductData.mjs';
+import { getParam, updateCartCount } from './utils.mjs';
 
-const dataSource = new ProductData('tents');
+const category = getParam('category') || 'tents';
+const dataSource = new ProductData(category);
 
 function productCardTemplate(product) {
     return `<li class="product-card">
@@ -20,3 +22,4 @@ async function renderProductList() {
 }
 
 renderProductList();
+updateCartCount();

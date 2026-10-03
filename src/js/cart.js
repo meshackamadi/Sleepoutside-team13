@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, updateCartCount } from "./utils.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
 
 loadHeaderFooter("/partials/header.html", "/partials/footer.html");
@@ -49,3 +49,4 @@ function cartItemTemplate(item) {
 }
 
 renderCartContents();
+updateCartCount();
