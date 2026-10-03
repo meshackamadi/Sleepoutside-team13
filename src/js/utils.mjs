@@ -50,3 +50,13 @@ export async function loadHeaderFooter(headerpath, footerpath) {
   renderWithTemplate(header, headerElement);
   renderWithTemplate(footer, footerElement);
 }
+
+export function updateCartCount() {
+  const cart = getLocalStorage('so-cart');
+  const count = Array.isArray(cart) ? cart.length : 0;
+  const badge = document.getElementById('cart-count');
+  if (badge) {
+    badge.textContent = count > 0 ? count : '';
+    badge.style.display = count > 0 ? 'inline' : 'none';
+  }
+}

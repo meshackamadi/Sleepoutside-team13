@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square > div {
+.logo--square>div {
   margin-top: -1.7em;
 }
 
@@ -129,6 +129,25 @@ button {
 
 .cart:hover svg {
   fill: gray;
+}
+
+.cart-count {
+  position: absolute;
+  top: 0.2em;
+  right: -0.4em;
+  background-color: var(--tertiary-color);
+  color: white;
+  font-size: 0.6rem;
+  font-weight: bold;
+  min-width: 1.4em;
+  height: 1.4em;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.4em;
+  text-align: center;
+  padding: 0 0.2em;
 }
 
 /* End cart icon styles */
@@ -264,4 +283,54 @@ footer {
 
 .hide {
   display: none;
+}
+
+/* Category section on home page */
+.category-list {
+  margin-top: 3rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.category-list h2 {
+  margin-bottom: 1rem;
+}
+
+.category-cards {
+  display: flex;
+  flex-flow: row wrap;
+  list-style-type: none;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.category-card {
+  flex: 1 1 120px;
+  max-width: 150px;
+  border: 1px solid var(--light-grey);
+  padding: 1rem 0.5rem;
+  transition: box-shadow 0.2s ease;
+}
+
+.category-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.category-card a {
+  text-decoration: none;
+  color: var(--dark-grey);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.category-card img {
+  width: 60px;
+  height: 60px;
+}
+
+.category-card h3 {
+  font-size: var(--small-font);
+  margin: 0;
 }
