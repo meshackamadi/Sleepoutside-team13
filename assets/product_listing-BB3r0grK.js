@@ -1,4 +1,4 @@
-import{a as r,u as c}from"./utils-jHYyWK34.js";import{P as e}from"./ProductData-Dx0C3TkS.js";const n=r("category")||"tents",o=new e(n);function s(a){return`<li class="product-card">
+import{a as r,u as c}from"./utils-jHYyWK34.js";import{P as e}from"./ProductData-DOx14_xX.js";const n=r("category")||"tents",o=new e(n);function s(a){return`<li class="product-card">
     <a href="../product_pages/index.html?product=${a.Id}">
       <img src="${a.Image}" alt="${a.Name}" />
       <h3 class="card__brand">${a.Brand.Name}</h3>
