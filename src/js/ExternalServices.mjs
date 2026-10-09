@@ -6,7 +6,7 @@ function convertToJson(res) {
   }
 }
 
-export default class ProductData {
+export default class ExternalServices {
   constructor(category) {
     this.category = category || 'tents';
     const baseUrl = import.meta.env.BASE_URL || '/';
@@ -45,5 +45,16 @@ export default class ProductData {
       }
     }
     return product;
+  }
+
+  async checkout(payload) {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    };
+    return await fetch('https://wdd330-backend-osp8.onrender.com/checkout', options).then(convertToJson);
   }
 }

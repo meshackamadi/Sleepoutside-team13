@@ -1,5 +1,5 @@
 import { getParam } from './utils.mjs';
-import ProductData from './ProductData.mjs';
+import ExternalServices from './ExternalServices.mjs';
 import ProductDetails from './ProductDetails.mjs';
 
 const filenameToId = {
@@ -23,7 +23,7 @@ if (!productId) {
   productId = '880RR';
 }
 
-const dataSource = new ProductData('tents');
+const dataSource = new ExternalServices('tents');
 
 const product = new ProductDetails(productId, dataSource);
 product.init();
