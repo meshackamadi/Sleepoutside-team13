@@ -28,8 +28,8 @@ if (form) {
     myCheckout.calculateOrdertotal();
     try {
       const res = await myCheckout.checkout(form);
-      alert('Order placed successfully!');
-      window.location.href = '/index.html';
+      const baseUrl = import.meta.env.BASE_URL || '/';
+      window.location.href = `${baseUrl}index.html`;
     } catch (err) {
       alert('Checkout failed. Please check your information and try again.');
     }

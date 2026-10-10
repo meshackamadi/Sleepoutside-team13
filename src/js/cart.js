@@ -1,12 +1,16 @@
-import { getLocalStorage, updateCartCount } from "./utils.mjs";
-import { loadHeaderFooter } from "./utils.mjs";
+import { getLocalStorage, updateCartCount, loadHeaderFooter } from "./utils.mjs";
 
 loadHeaderFooter("/partials/header.html", "/partials/footer.html");
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
+  const baseUrl = import.meta.env.BASE_URL || "/";
+  const checkoutBtn = document.querySelector("#checkout-btn");
+  if (checkoutBtn) {
+    checkoutBtn.href = `${baseUrl}checkout/index.html`;
+  }
+
   if (cartItems && cartItems.length > 0) {
-    // If it is somehow a single object, we can wrap it in an array to avoid map errors on old data
     const itemsArray = Array.isArray(cartItems) ? cartItems : [cartItems];
     const htmlItems = itemsArray.map((item) => cartItemTemplate(item));
     document.querySelector(".product-list").innerHTML = htmlItems.join("");
@@ -14,22 +18,31 @@ function renderCartContents() {
     // Calculate total
     let total = 0;
     itemsArray.forEach((item) => {
-      total += item.FinalPrice;
+      total += (item.FinalPrice || item.price || 0);
     });
 
-    // Show the footer and display total
+    // Show footer and display total
     const cartFooter = document.querySelector(".cart-footer");
     const cartTotal = document.querySelector(".cart-total");
-    cartTotal.innerHTML = `Total: $${total.toFixed(2)}`;
-    cartFooter.classList.remove("hide");
+    if (cartTotal) {
+      cartTotal.innerHTML = `Total: $${total.toFixed(2)}`;
+    }
+    if (cartFooter) {
+      cartFooter.classList.remove("hide");
+    }
   } else {
     document.querySelector(".product-list").innerHTML =
       "<p>Your cart is empty.</p>";
-    document.querySelector(".cart-footer").classList.add("hide");
+    const cartFooter = document.querySelector(".cart-footer");
+    if (cartFooter) {
+      cartFooter.classList.add("hide");
+    }
   }
 }
 
 function cartItemTemplate(item) {
+  const colorName = item.Colors?.[0]?.ColorName || "";
+  const price = item.FinalPrice || item.price || 0;
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
@@ -40,9 +53,9 @@ function cartItemTemplate(item) {
   <a href="#">
     <h2 class="card__name">${item.Name}</h2>
   </a>
-  <p class="cart-card__color">${item.Colors[0].ColorName}</p>
+  <p class="cart-card__color">${colorName}</p>
   <p class="cart-card__quantity">qty: 1</p>
-  <p class="cart-card__price">$${item.FinalPrice}</p>
+  <p class="cart-card__price">$${Number(price).toFixed(2)}</p>
 </li>`;
 
   return newItem;
