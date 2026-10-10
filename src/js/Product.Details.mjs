@@ -1,11 +1,15 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getParam } from './utils.mjs';
+import ExternalServices from './ExternalServices.mjs';
+import ProductDetails from './ProductDetails.mjs';
 
-import { getParam } from "./utils.mjs";
-import ProductData from "./ProductData.mjs";
-import { ProductDetails } from "./Product.Details.mjs";
+export default ProductDetails;
+export { ProductDetails };
 
-const productId = getParam("product");
-const dataSource = new ProductData('tents');
-
-const product = new ProductDetails(productId, dataSource);
-product.init();
+if (typeof window !== 'undefined') {
+  const productId = getParam('product');
+  if (productId) {
+    const dataSource = new ExternalServices('tents');
+    const product = new ProductDetails(productId, dataSource);
+    product.init();
+  }
+}

@@ -1,8 +1,8 @@
-import ProductData from './ProductData.mjs';
+import ExternalServices from './ExternalServices.mjs';
 import { getParam, updateCartCount } from './utils.mjs';
 
 const category = getParam('category') || 'tents';
-const dataSource = new ProductData(category);
+const dataSource = new ExternalServices(category);
 
 function productCardTemplate(product) {
     return `<li class="product-card">

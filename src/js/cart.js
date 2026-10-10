@@ -20,7 +20,7 @@ function renderCartContents() {
     // Show the footer and display total
     const cartFooter = document.querySelector(".cart-footer");
     const cartTotal = document.querySelector(".cart-total");
-    cartTotal.innerHTML = `Total: $${total}`;
+    cartTotal.innerHTML = `Total: $${total.toFixed(2)}`;
     cartFooter.classList.remove("hide");
   } else {
     document.querySelector(".product-list").innerHTML =

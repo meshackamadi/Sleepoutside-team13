@@ -47,3 +47,5 @@ export default class ProductDetails {
     document.title = `Sleep Outside | ${p.Name}`;
   }
 }
+
+export { ProductDetails };
